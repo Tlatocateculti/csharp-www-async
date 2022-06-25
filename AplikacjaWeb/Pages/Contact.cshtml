@@ -1,0 +1,27 @@
+﻿@page 
+@using AplikacjaWeb.Model
+@using Microsoft.JSInterop
+@inject IJSRuntime JsRuntime
+@Html.AntiForgeryToken()
+@inject IJSRuntime JS
+
+@model AplikacjaWeb.Pages.ContactModel
+@{
+    ViewData["title"] = "Skontaktuj się";
+    
+}
+<div>
+	<p>Tel: @Model.Tel</p>
+	<p>Nazwa: @Model.Name</p>
+	<p>Adres: @Model.Address</p>
+</div>
+<partial name="_formcontact" for="Forms"/>
+
+@{
+    [JSInvokable("DoSomething")]
+    static async Task<string> DoSomething()
+    {
+        Console.WriteLine("HEJ");
+        return await Task.FromResult("Test");
+    }
+}
